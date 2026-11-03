@@ -1,0 +1,556 @@
+================================================================================
+STARTING ISOLATED PRODUCTION VALIDATION (PROJECT: pharmacy_validate)
+================================================================================
+Created temporary .env for validation project.
+
+--- CHECK 1: Container Startup & Health ---
+$ docker compose --project-name pharmacy_validate down -v
+STDERR:
+Container pharmacy_validate-frontend-1 Stopping 
+ Container pharmacy_validate-frontend-1 Stopped 
+ Container pharmacy_validate-frontend-1 Removing 
+ Container pharmacy_validate-frontend-1 Removed 
+ Container pharmacy_validate-api-1 Stopping 
+ Container pharmacy_validate-api-1 Stopped 
+ Container pharmacy_validate-api-1 Removing 
+ Container pharmacy_validate-api-1 Removed 
+ Container pharmacy_validate-db-1 Stopping 
+ Container pharmacy_validate-db-1 Stopped 
+ Container pharmacy_validate-db-1 Removing 
+ Container pharmacy_validate-db-1 Removed 
+ Network pharmacy_validate_default Removing 
+ Volume pharmacy_validate_pharmacy_pgdata Removing 
+ Volume pharmacy_validate_pharmacy_pgdata Removed 
+ Network pharmacy_validate_default Removed
+$ docker compose --project-name pharmacy_validate up -d --build
+STDOUT:
+#1 [internal] load local bake definitions
+#1 reading from stdin 967B done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 387B 0.0s done
+#3 DONE 0.1s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 375B 0.0s done
+#2 DONE 0.1s
+
+#4 [api internal] load metadata for docker.io/library/python:3.12-slim
+#4 ...
+
+#5 [auth] library/node:pull token for registry-1.docker.io
+#5 DONE 0.0s
+
+#6 [auth] library/nginx:pull token for registry-1.docker.io
+#6 DONE 0.0s
+
+#7 [auth] library/python:pull token for registry-1.docker.io
+#7 DONE 0.0s
+
+#8 [frontend internal] load metadata for docker.io/library/nginx:alpine
+#8 ...
+
+#4 [api internal] load metadata for docker.io/library/python:3.12-slim
+#4 DONE 4.5s
+
+#8 [frontend internal] load metadata for docker.io/library/nginx:alpine
+#8 DONE 4.6s
+
+#9 [frontend internal] load metadata for docker.io/library/node:20-alpine
+#9 DONE 4.6s
+
+#10 [api internal] load .dockerignore
+#10 transferring context: 136B 0.0s done
+#10 DONE 0.1s
+
+#11 [frontend internal] load .dockerignore
+#11 transferring context: 66B 0.0s done
+#11 DONE 0.3s
+
+#12 [api 1/6] FROM docker.io/library/python:3.12-slim@sha256:a0f57064cbdcd6285fa45f51237ab0b35ea8ebaed06a1f5973e89e19dfb86704
+#12 resolve docker.io/library/python:3.12-slim@sha256:a0f57064cbdcd6285fa45f51237ab0b35ea8ebaed06a1f5973e89e19dfb86704 0.1s done
+#12 DONE 0.2s
+
+#13 [api internal] load build context
+#13 transferring context: 31.78kB 0.1s done
+#13 DONE 0.2s
+
+#14 [api 4/6] COPY requirements.txt .
+#14 CACHED
+
+#15 [api 3/6] RUN apt-get update && apt-get install -y --no-install-recommends     gcc libpq-dev curl     && rm -rf /var/lib/apt/lists/*
+#15 CACHED
+
+#16 [api 2/6] WORKDIR /code
+#16 CACHED
+
+#17 [api 5/6] RUN pip install --no-cache-dir -r requirements.txt
+#17 CACHED
+
+#18 [frontend internal] load build context
+#18 transferring context: 3.25kB 0.0s done
+#18 DONE 0.1s
+
+#19 [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df01243fbae3e11cfd17417
+#19 resolve docker.io/library/nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df01243fbae3e11cfd17417
+#19 resolve docker.io/library/nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df01243fbae3e11cfd17417 0.2s done
+#19 DONE 0.2s
+
+#20 [frontend builder 1/6] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#20 resolve docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 0.2s done
+#20 DONE 0.2s
+
+#21 [frontend builder 5/6] COPY . .
+#21 CACHED
+
+#22 [frontend stage-1 2/3] COPY --from=builder /app/dist /usr/share/nginx/html
+#22 CACHED
+
+#23 [frontend builder 3/6] COPY package*.json ./
+#23 CACHED
+
+#24 [frontend builder 6/6] RUN npm run build
+#24 CACHED
+
+#25 [frontend builder 2/6] WORKDIR /app
+#25 CACHED
+
+#26 [frontend builder 4/6] RUN npm ci
+#26 CACHED
+
+#27 [frontend stage-1 3/3] COPY nginx.conf /etc/nginx/conf.d/default.conf
+#27 CACHED
+
+#28 [api 6/6] COPY . .
+#28 DONE 0.3s
+
+#29 [frontend] exporting to image
+#29 exporting layers 0.0s done
+#29 exporting manifest sha256:d18e6e31269a8a4c6b57383f40cffea66770803ae85ce878e5f8cbd748e6f2cc 0.0s done
+#29 exporting config sha256:81656e5aa26bcf8d570c6f61e7ad4d9e82af2e0a1abf7193166f0009f3674a39 0.0s done
+#29 exporting attestation manifest sha256:deb3cb8d02d01a47277e1c6b38e0590cc37acf85fdddd1239cadb43f4bb03a41
+#29 exporting attestation manifest sha256:deb3cb8d02d01a47277e1c6b38e0590cc37acf85fdddd1239cadb43f4bb03a41 0.1s done
+#29 exporting manifest list sha256:073badfb9b56d6e1520672369c0976f496ad10ca6c5aa48b99c9a31a1cd11ea6
+#29 exporting manifest list sha256:073badfb9b56d6e1520672369c0976f496ad10ca6c5aa48b99c9a31a1cd11ea6 0.1s done
+#29 naming to docker.io/library/pharmacy_validate-frontend:latest 0.0s done
+#29 unpacking to docker.io/library/pharmacy_validate-frontend:latest
+#29 unpacking to docker.io/library/pharmacy_validate-frontend:latest 0.1s done
+#29 DONE 0.5s
+
+#30 [api] exporting to image
+#30 exporting layers 1.0s done
+#30 ...
+
+#31 [frontend] resolving provenance for metadata file
+#31 DONE 0.0s
+
+#30 [api] exporting to image
+#30 exporting manifest sha256:ae16679598671981d8870197dce7bdeeaa798a3b2b2503c7932008cf505e17a3 0.1s done
+#30 exporting config sha256:bf44a98d2d5235f72fd1ae7edea0153d7c7b21a108d0f66c18d5da5c2dc687bf 0.1s done
+#30 exporting attestation manifest sha256:5ae14a5bc7f1416441c6d435d4306ea9d6ab23c72de98332d05cb08d5318a93c 0.1s done
+#30 exporting manifest list sha256:82775ecf732dad0265a4099a4352b6852d08aae6c775a35edcdc8298a2cb8f30
+#30 exporting manifest list sha256:82775ecf732dad0265a4099a4352b6852d08aae6c775a35edcdc8298a2cb8f30 0.1s done
+#30 naming to docker.io/library/pharmacy_validate-api:latest 0.0s done
+#30 unpacking to docker.io/library/pharmacy_validate-api:latest
+#30 unpacking to docker.io/library/pharmacy_validate-api:latest 0.7s done
+#30 DONE 2.3s
+
+#32 [api] resolving provenance for metadata file
+#32 DONE 0.0s
+STDERR:
+Image pharmacy_validate-api Building 
+ Image pharmacy_validate-frontend Building 
+ Image pharmacy_validate-frontend Built 
+ Image pharmacy_validate-api Built 
+ Network pharmacy_validate_default Creating 
+ Network pharmacy_validate_default Creating 
+ Volume pharmacy_validate_pharmacy_pgdata Creating 
+ Volume pharmacy_validate_pharmacy_pgdata Creating 
+ Volume pharmacy_validate_pharmacy_pgdata Created 
+ Volume pharmacy_validate_pharmacy_pgdata Created 
+ Network pharmacy_validate_default Created 
+ Network pharmacy_validate_default Created 
+ Container pharmacy_validate-db-1 Creating 
+ Container pharmacy_validate-db-1 Created 
+ Container pharmacy_validate-api-1 Creating 
+ Container pharmacy_validate-api-1 Created 
+ Container pharmacy_validate-frontend-1 Creating 
+ Container pharmacy_validate-frontend-1 Created 
+ Container pharmacy_validate-db-1 Starting 
+ Container pharmacy_validate-db-1 Started 
+ Container pharmacy_validate-db-1 Waiting 
+ Container pharmacy_validate-db-1 Healthy 
+ Container pharmacy_validate-api-1 Starting 
+ Container pharmacy_validate-api-1 Started 
+ Container pharmacy_validate-api-1 Waiting 
+ Container pharmacy_validate-api-1 Healthy 
+ Container pharmacy_validate-frontend-1 Starting 
+ Container pharmacy_validate-frontend-1 Started
+$ docker compose --project-name pharmacy_validate ps --format json
+STDOUT:
+{"Command":"\"uvicorn app.main:apâ€¦\"","CreatedAt":"2026-10-24 13:34:13 +0300 EEST","Engine":"","ExitCode":0,"Health":"healthy","ID":"4180d9b6b682","Image":"pharmacy_validate-api","Labels":"com.docker.compose.config-hash=1bd3c99e9c216d59c278ddb91180a5af64dfc9433c7d5b06377471c7e1f4824c,com.docker.compose.depends_on=db:service_healthy:false,com.docker.compose.image=sha256:ae16679598671981d8870197dce7bdeeaa798a3b2b2503c7932008cf505e17a3,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=F:\\Pharmacy-Deployment,com.docker.compose.version=5.6.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8000/tcp=:8001,com.docker.compose.container-number=1,com.docker.compose.project=pharmacy_validate,com.docker.compose.project.config_files=F:\\Pharmacy-Deployment\\docker-compose.yml,com.docker.compose.service=api","LocalVolumes":"0","Mounts":"","Name":"pharmacy_validate-api-1","Names":"pharmacy_validate-api-1","Networks":"pharmacy_validate_default","Ports":"0.0.0.0:8001-\u003e8000/tcp, [::]:8001-\u003e8000/tcp","Project":"pharmacy_validate","Publishers":[{"URL":"0.0.0.0","TargetPort":8000,"PublishedPort":8001,"Protocol":"tcp"},{"URL":"::","TargetPort":8000,"PublishedPort":8001,"Protocol":"tcp"}],"RunningFor":"18 seconds ago","Service":"api","Size":"0B","State":"running","Status":"Up 10 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.sâ€¦\"","CreatedAt":"2026-10-24 13:34:13 +0300 EEST","Engine":"","ExitCode":0,"Health":"healthy","ID":"3ae3d93a1901","Image":"postgres:16-alpine","Labels":"com.docker.compose.config-hash=dad43b2597b7778ca1d86e8c7b8f4813245ae93633fbed30ff6cbd2ff5e268b9,com.docker.compose.oneoff=False,com.docker.compose.project=pharmacy_validate,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:075f7ba66bc9b3ce7d6b8b635208ff61cd7cf1a67d71ec530eec5d7ae0cbe571,com.docker.compose.project.config_files=F:\\Pharmacy-Deployment\\docker-compose.yml,com.docker.compose.project.working_dir=F:\\Pharmacy-Deployment,com.docker.compose.service=db,com.docker.compose.version=5.6.0,desktop.docker.io/ports.scheme=v2","LocalVolumes":"1","Mounts":"pharmacy_validâ€¦","Name":"pharmacy_validate-db-1","Names":"pharmacy_validate-db-1","Networks":"pharmacy_validate_default","Ports":"5432/tcp","Project":"pharmacy_validate","Publishers":[{"URL":"","TargetPort":5432,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"18 seconds ago","Service":"db","Size":"0B","State":"running","Status":"Up 16 seconds (healthy)"}
+{"Command":"\"/docker-entrypoint.â€¦\"","CreatedAt":"2026-10-24 13:34:14 +0300 EEST","Engine":"","ExitCode":0,"Health":"","ID":"064075fafe67","Image":"pharmacy_validate-frontend","Labels":"com.docker.compose.project.working_dir=F:\\Pharmacy-Deployment,com.docker.compose.service=frontend,com.docker.compose.version=5.6.0,maintainer=NGINX Docker Maintainers \u003cdocker-maint@nginx.com\u003e,com.docker.compose.config-hash=3f22b5248ee13f9f9bf6b08edd871bf33b744df127202f0328a0b9876386dfd0,com.docker.compose.container-number=1,com.docker.compose.depends_on=api:service_healthy:false,com.docker.compose.image=sha256:d18e6e31269a8a4c6b57383f40cffea66770803ae85ce878e5f8cbd748e6f2cc,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/80/tcp=:8080,com.docker.compose.oneoff=False,com.docker.compose.project=pharmacy_validate,com.docker.compose.project.config_files=F:\\Pharmacy-Deployment\\docker-compose.yml","LocalVolumes":"0","Mounts":"","Name":"pharmacy_validate-frontend-1","Names":"pharmacy_validate-frontend-1","Networks":"pharmacy_validate_default","Ports":"0.0.0.0:8080-\u003e80/tcp, [::]:8080-\u003e80/tcp","Project":"pharmacy_validate","Publishers":[{"URL":"0.0.0.0","TargetPort":80,"PublishedPort":8080,"Protocol":"tcp"},{"URL":"::","TargetPort":80,"PublishedPort":8080,"Protocol":"tcp"}],"RunningFor":"17 seconds ago","Service":"frontend","Size":"0B","State":"running","Status":"Up 3 seconds"}
+Health check attempt 1: {'api': 'healthy', 'db': 'healthy', 'frontend': ''}
+[CHECK 1 PASSED] All containers are running and reported healthy.
+
+--- CHECK 2: HTTP Web App Loading at Port 8080 ---
+HTTP GET http://localhost:8080 -> Status: 200
+[CHECK 2 PASSED] Frontend web application loaded successfully at http://localhost:8080.
+
+--- CHECK 3: Alembic Upgrade Head & Primary Owner Authentication ---
+$ docker compose --project-name pharmacy_validate exec -T api alembic upgrade head
+STDERR:
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> ad728752a853, initial schema
+INFO  [alembic.runtime.migration] Running upgrade ad728752a853 -> 5f636dab1197, add_supplier_contact_person_is_active
+INFO  [alembic.runtime.migration] Running upgrade 5f636dab1197 -> 8a33712f6b8d, add_purchase_notes
+INFO  [alembic.runtime.migration] Running upgrade 8a33712f6b8d -> c3f1a2b4d5e6, phase6_notification_columns
+INFO  [alembic.runtime.migration] Running upgrade c3f1a2b4d5e6 -> e5f2a1b9c8d7, customer_credit_accounts_and_ledger
+INFO  [alembic.runtime.migration] Running upgrade e5f2a1b9c8d7 -> f6a7b8c9d0e1, add_is_primary_admin_to_users
+INFO  [alembic.runtime.migration] Running upgrade f6a7b8c9d0e1 -> b7c8d9e0f1a2, add_financial_management_and_expenses
+INFO  [alembic.runtime.migration] Running upgrade b7c8d9e0f1a2 -> d8e9f0a1b2c3, add_pharmaceutical_master_and_multi_unit_packaging
+INFO  [alembic.runtime.migration] Running upgrade d8e9f0a1b2c3 -> e1f2a3b4c5d6, add_product_categories_and_dosage_subtypes
+INFO  [alembic.runtime.migration] Running upgrade e1f2a3b4c5d6 -> c7d8e9f0a1b2, add_controlled_medicines_and_audit_snapshots
+$ docker compose --project-name pharmacy_validate exec -T api alembic current
+STDOUT:
+c7d8e9f0a1b2 (head)
+STDERR:
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+$ docker compose --project-name pharmacy_validate exec -T api python scripts/create_admin.py --username admin --full-name "Dr. Eman Ameen" --password "[REDACTED_OWNER_PASS]" --primary
+STDOUT:
+Admin user 'admin' created successfully (Primary Owner: True).
+POST http://localhost:8001/auth/login -> Status: 200
+[CHECK 3 PASSED] Primary owner authenticated successfully via OAuth2 API token.
+
+--- CHECK 4: Owner Permissions & Primary Admin Invariants ---
+GET /auth/me data: username=admin, role=admin, is_primary_admin=True
+DELETE /users/a8d0bdb3-566a-4f72-b46e-e64d5ad0d8b7 -> HTTP 400 (Expected 400: {"detail":"Primary owner account cannot be deactivated or deleted"})
+PATCH /users/a8d0bdb3-566a-4f72-b46e-e64d5ad0d8b7 deactivation -> HTTP 400 (Expected 400: {"detail":"Primary owner account cannot be deactivated"})
+PATCH /users/a8d0bdb3-566a-4f72-b46e-e64d5ad0d8b7 demotion -> HTTP 400 (Expected 400: {"detail":"Primary owner role cannot be changed from Admin"})
+[CHECK 4 PASSED] Owner permissions and is_primary_admin protections verified.
+
+--- CHECKS 5, 6, 7: Table Row Counts Audit ---
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE' ORDER BY table_name;"
+STDOUT:
+active_ingredients
+alembic_version
+audit_logs
+customer_credit_transactions
+customer_payments
+customers
+demand_forecasts
+dosage_forms
+drug_families
+expense_categories
+expenses
+inventory_movements
+medicine_active_ingredients
+medicine_batches
+medicine_package_units
+medicines
+notifications
+product_categories
+product_subcategories
+purchase_items
+purchases
+sale_items
+sale_returns
+sales
+supplier_payments
+suppliers
+users
+Discovered 27 tables: ['active_ingredients', 'alembic_version', 'audit_logs', 'customer_credit_transactions', 'customer_payments', 'customers', 'demand_forecasts', 'dosage_forms', 'drug_families', 'expense_categories', 'expenses', 'inventory_movements', 'medicine_active_ingredients', 'medicine_batches', 'medicine_package_units', 'medicines', 'notifications', 'product_categories', 'product_subcategories', 'purchase_items', 'purchases', 'sale_items', 'sale_returns', 'sales', 'supplier_payments', 'suppliers', 'users']
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM active_ingredients;"
+STDOUT:
+0
+Table 'active_ingredients': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM alembic_version;"
+STDOUT:
+1
+Table 'alembic_version': 1 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM audit_logs;"
+STDOUT:
+0
+Table 'audit_logs': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM customer_credit_transactions;"
+STDOUT:
+0
+Table 'customer_credit_transactions': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM customer_payments;"
+STDOUT:
+0
+Table 'customer_payments': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM customers;"
+STDOUT:
+0
+Table 'customers': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM demand_forecasts;"
+STDOUT:
+0
+Table 'demand_forecasts': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM dosage_forms;"
+STDOUT:
+44
+Table 'dosage_forms': 44 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM drug_families;"
+STDOUT:
+13
+Table 'drug_families': 13 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM expense_categories;"
+STDOUT:
+9
+Table 'expense_categories': 9 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM expenses;"
+STDOUT:
+0
+Table 'expenses': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM inventory_movements;"
+STDOUT:
+0
+Table 'inventory_movements': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM medicine_active_ingredients;"
+STDOUT:
+0
+Table 'medicine_active_ingredients': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM medicine_batches;"
+STDOUT:
+0
+Table 'medicine_batches': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM medicine_package_units;"
+STDOUT:
+0
+Table 'medicine_package_units': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM medicines;"
+STDOUT:
+0
+Table 'medicines': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM notifications;"
+STDOUT:
+0
+Table 'notifications': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM product_categories;"
+STDOUT:
+11
+Table 'product_categories': 11 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM product_subcategories;"
+STDOUT:
+40
+Table 'product_subcategories': 40 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM purchase_items;"
+STDOUT:
+0
+Table 'purchase_items': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM purchases;"
+STDOUT:
+0
+Table 'purchases': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM sale_items;"
+STDOUT:
+0
+Table 'sale_items': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM sale_returns;"
+STDOUT:
+0
+Table 'sale_returns': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM sales;"
+STDOUT:
+0
+Table 'sales': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM supplier_payments;"
+STDOUT:
+0
+Table 'supplier_payments': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM suppliers;"
+STDOUT:
+0
+Table 'suppliers': 0 rows
+$ docker compose --project-name pharmacy_validate exec -T db psql -U pharmacy_val -d pharmacy_validate_db -t -A -c "SELECT COUNT(*) FROM users;"
+STDOUT:
+1
+Table 'users': 1 rows
+[LOOKUP] 'drug_families': 13 rows (>0)
+[LOOKUP] 'dosage_forms': 44 rows (>0)
+[LOOKUP] 'product_categories': 11 rows (>0)
+[LOOKUP] 'product_subcategories': 40 rows (>0)
+[LOOKUP] 'expense_categories': 9 rows (>0)
+[CHECKS 5, 6, 7 PASSED] All row count requirements met exactly.
+
+--- CHECK 8: PostgreSQL Port 5432 Isolation ---
+$ docker compose --project-name pharmacy_validate port db 5432
+STDOUT:
+:0
+docker compose port db 5432: ':0'
+$ docker inspect pharmacy_validate-db-1 --format "{{json .NetworkSettings.Ports}}"
+STDOUT:
+{"5432/tcp":null}
+[OK] Docker inspect confirms '5432/tcp' host binding is NULL.
+[OK] Host 5432 is occupied by dev container; pharmacy_validate_db is NOT accessible on it.
+[CHECK 8 PASSED] Port 5432 isolation verified.
+
+--- CHECK 9: Operational Scripts Verification ---
+Generated validation backup: F:\Pharmacy-Deployment\backups_validation\pharmacy_validate_backup.sql (90419 bytes)
+[CHECK 9 PASSED] Backup script execution and dump verification passed.
+
+--- CHECK 10: Restore into Second Isolated Database (pharmacy_validate_restore) ---
+$ docker rm -f pharmacy_val_restore_db
+$ docker run -d --name pharmacy_val_restore_db -e POSTGRES_USER=pharmacy_val -e POSTGRES_PASSWORD=restore_pw -e POSTGRES_DB=pharmacy_validate_restore postgres:16-alpine
+STDOUT:
+4948a7087e27a04693ce424882249bcce62b4f355c549fe35c38081ef1f2f7de
+$ docker exec pharmacy_val_restore_db pg_isready -U pharmacy_val -d pharmacy_validate_restore
+STDOUT:
+/var/run/postgresql:5432 - no response
+$ docker exec pharmacy_val_restore_db pg_isready -U pharmacy_val -d pharmacy_validate_restore
+STDOUT:
+/var/run/postgresql:5432 - no response
+$ docker exec pharmacy_val_restore_db pg_isready -U pharmacy_val -d pharmacy_validate_restore
+STDOUT:
+/var/run/postgresql:5432 - rejecting connections
+$ docker exec pharmacy_val_restore_db pg_isready -U pharmacy_val -d pharmacy_validate_restore
+STDOUT:
+/var/run/postgresql:5432 - accepting connections
+Restore output: exit code 0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM active_ingredients;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM alembic_version;"
+STDOUT:
+1
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM audit_logs;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM customer_credit_transactions;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM customer_payments;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM customers;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM demand_forecasts;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM dosage_forms;"
+STDOUT:
+44
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM drug_families;"
+STDOUT:
+13
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM expense_categories;"
+STDOUT:
+9
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM expenses;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM inventory_movements;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM medicine_active_ingredients;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM medicine_batches;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM medicine_package_units;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM medicines;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM notifications;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM product_categories;"
+STDOUT:
+11
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM product_subcategories;"
+STDOUT:
+40
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM purchase_items;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM purchases;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM sale_items;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM sale_returns;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM sales;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM supplier_payments;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM suppliers;"
+STDOUT:
+0
+$ docker exec pharmacy_val_restore_db psql -U pharmacy_val -d pharmacy_validate_restore -t -A -c "SELECT COUNT(*) FROM users;"
+STDOUT:
+1
+Comparing restored counts with original validation counts...
+  'active_ingredients': 0 == 0 (MATCH)
+  'alembic_version': 1 == 1 (MATCH)
+  'audit_logs': 0 == 0 (MATCH)
+  'customer_credit_transactions': 0 == 0 (MATCH)
+  'customer_payments': 0 == 0 (MATCH)
+  'customers': 0 == 0 (MATCH)
+  'demand_forecasts': 0 == 0 (MATCH)
+  'dosage_forms': 44 == 44 (MATCH)
+  'drug_families': 13 == 13 (MATCH)
+  'expense_categories': 9 == 9 (MATCH)
+  'expenses': 0 == 0 (MATCH)
+  'inventory_movements': 0 == 0 (MATCH)
+  'medicine_active_ingredients': 0 == 0 (MATCH)
+  'medicine_batches': 0 == 0 (MATCH)
+  'medicine_package_units': 0 == 0 (MATCH)
+  'medicines': 0 == 0 (MATCH)
+  'notifications': 0 == 0 (MATCH)
+  'product_categories': 11 == 11 (MATCH)
+  'product_subcategories': 40 == 40 (MATCH)
+  'purchase_items': 0 == 0 (MATCH)
+  'purchases': 0 == 0 (MATCH)
+  'sale_items': 0 == 0 (MATCH)
+  'sale_returns': 0 == 0 (MATCH)
+  'sales': 0 == 0 (MATCH)
+  'supplier_payments': 0 == 0 (MATCH)
+  'suppliers': 0 == 0 (MATCH)
+  'users': 1 == 1 (MATCH)
+[CHECK 10 PASSED] Restored database row counts match original validation database 100%.
+
+--- TEARDOWN: Cleaning up validation resources ---
+$ docker compose --project-name pharmacy_validate down -v
+STDERR:
+Container pharmacy_validate-frontend-1 Stopping 
+ Container pharmacy_validate-frontend-1 Stopped 
+ Container pharmacy_validate-frontend-1 Removing 
+ Container pharmacy_validate-frontend-1 Removed 
+ Container pharmacy_validate-api-1 Stopping 
+ Container pharmacy_validate-api-1 Stopped 
+ Container pharmacy_validate-api-1 Removing 
+ Container pharmacy_validate-api-1 Removed 
+ Container pharmacy_validate-db-1 Stopping 
+ Container pharmacy_validate-db-1 Stopped 
+ Container pharmacy_validate-db-1 Removing 
+ Container pharmacy_validate-db-1 Removed 
+ Volume pharmacy_validate_pharmacy_pgdata Removing 
+ Network pharmacy_validate_default Removing 
+ Volume pharmacy_validate_pharmacy_pgdata Removed 
+ Network pharmacy_validate_default Removed
+$ docker rm -f pharmacy_val_restore_db
+STDOUT:
+pharmacy_val_restore_db
+[CLEANUP COMPLETE] Only validation resources were removed. Development and live databases remain completely intact.
+
+================================================================================
+ALL 10 VALIDATION CHECKS PASSED SUCCESSFULLY!
+================================================================================

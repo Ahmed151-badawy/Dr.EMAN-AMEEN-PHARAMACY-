@@ -1,0 +1,237 @@
+================================================================================
+DR. EMAN AMEEN PHARMACY SYSTEM - SOURCE CODE STATE CAPTURE
+Captured on: 2026-10-24 12:42:08 +03:00
+Source Repository: F:\DR.EMAN AMEEN PHARMACY
+================================================================================
+
+--- GIT LOG -1 ---
+commit b01a5cedc8f5dc0f27b408e67d85e4f949b033da
+Author: Ahmed151-badawy <ahmedbadawy0004@gmail.com>
+Date:   Thu Sep 3 20:51:21 2026 +0300
+
+    Finalize production deployment configuration
+
+--- GIT STATUS ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   .env.example
+	modified:   .gitignore
+	new file:   DEPLOYMENT_GUIDE.md
+	modified:   README.md
+	new file:   alembic/versions/b7c8d9e0f1a2_add_financial_management_and_expenses.py
+	new file:   alembic/versions/d8e9f0a1b2c3_add_pharmaceutical_master_and_multi_unit_packaging.py
+	new file:   alembic/versions/e1f2a3b4c5d6_add_product_categories_and_dosage_subtypes.py
+	new file:   alembic/versions/e5f2a1b9c8d7_customer_credit_accounts_and_ledger.py
+	new file:   alembic/versions/f6a7b8c9d0e1_add_is_primary_admin_to_users.py
+	new file:   app/api/credit.py
+	modified:   app/api/customers.py
+	modified:   app/api/deps.py
+	new file:   app/api/financial.py
+	new file:   app/api/forecasts.py
+	modified:   app/api/medicines.py
+	modified:   app/api/purchases.py
+	modified:   app/api/sales.py
+	modified:   app/api/suppliers.py
+	modified:   app/api/users.py
+	modified:   app/core/config.py
+	modified:   app/core/security.py
+	modified:   app/main.py
+	modified:   app/models/__init__.py
+	new file:   app/models/credit.py
+	modified:   app/models/customer.py
+	new file:   app/models/financial.py
+	modified:   app/models/medicine.py
+	modified:   app/models/purchase.py
+	modified:   app/models/sale.py
+	modified:   app/models/user.py
+	new file:   app/schemas/credit.py
+	modified:   app/schemas/customer.py
+	new file:   app/schemas/financial.py
+	new file:   app/schemas/forecasting.py
+	modified:   app/schemas/medicine.py
+	modified:   app/schemas/purchase.py
+	modified:   app/schemas/sale.py
+	modified:   app/schemas/user.py
+	new file:   app/services/credit.py
+	new file:   app/services/financial.py
+	new file:   app/services/forecasting.py
+	new file:   app/services/medicine_master.py
+	modified:   app/services/purchases.py
+	modified:   app/services/sales.py
+	new file:   backups/financial_module_pre_migration_backup_2026-09-07_15-33-33.sql
+	new file:   backups/pre_medicine_master_upgrade_backup_2026-10-06.sql
+	new file:   backups/pre_production_cleanup_backup_2026-09-03_21-41-48.sql
+	new file:   backups/production_clean_initial_state_2026-09-03_21-53-04.sql
+	new file:   docker-compose.prod.yml
+	modified:   docker-compose.yml
+	new file:   frontend/dist/assets/index-BknLqf7n.css
+	new file:   frontend/dist/assets/index-CxS7HzkQ.js
+	new file:   frontend/dist/assets/logo-BCGJOSpB.png
+	new file:   frontend/dist/favicon.ico
+	new file:   frontend/dist/index.html
+	modified:   frontend/index.html
+	modified:   frontend/nginx.conf
+	new file:   frontend/public/favicon.ico
+	modified:   frontend/src/App.tsx
+	new file:   frontend/src/assets/favicon.ico
+	new file:   frontend/src/components/common/GlobalSearchModal.tsx
+	modified:   frontend/src/components/layout/AppShell.tsx
+	modified:   frontend/src/components/layout/Header.tsx
+	modified:   frontend/src/components/layout/Sidebar.tsx
+	modified:   frontend/src/i18n/locales/ar.json
+	modified:   frontend/src/i18n/locales/en.json
+	new file:   frontend/src/pages/Financial.tsx
+	modified:   frontend/src/pages/Medicines.tsx
+	modified:   frontend/src/pages/POS.tsx
+	modified:   frontend/src/pages/Users.tsx
+	new file:   frontend/src/services/api/financial.ts
+	modified:   frontend/src/services/api/medicines.ts
+	modified:   frontend/src/services/api/sales.ts
+	modified:   frontend/src/services/api/users.ts
+	modified:   frontend/src/types/index.ts
+	new file:   frontend/src/utils/packaging.ts
+	modified:   frontend/src/utils/receiptPrinter.ts
+	modified:   frontend/tsconfig.tsbuildinfo
+	modified:   requirements.txt
+	new file:   scripts/clean_and_seed_pharmacy_master.py
+	new file:   scripts/clean_production_database.py
+	modified:   scripts/create_admin.py
+	new file:   scripts/run_phase10d_full_qa.py
+	new file:   scripts/verify_clean_backup.py
+	new file:   scripts/windows/backup_database.bat
+	new file:   scripts/windows/create_desktop_shortcut.bat
+	new file:   scripts/windows/launch_pharmacy.bat
+	new file:   scripts/windows/restart_pharmacy.bat
+	new file:   scripts/windows/restore_database.bat
+	new file:   scripts/windows/run_migrations.bat
+	new file:   scripts/windows/schedule_daily_backup.bat
+	new file:   scripts/windows/setup_windows_autostart.py
+	new file:   scripts/windows/start_pharmacy.bat
+	new file:   scripts/windows/status_pharmacy.bat
+	new file:   scripts/windows/stop_pharmacy.bat
+	new file:   tests/conftest.py
+	new file:   tests/test_auth.py
+	new file:   tests/test_credit_concurrency.py
+	new file:   tests/test_credit_ledger.py
+	new file:   tests/test_credit_sales_and_returns.py
+	new file:   tests/test_customers.py
+	new file:   tests/test_financial.py
+	new file:   tests/test_forecasting.py
+	new file:   tests/test_integration_e2e.py
+	new file:   tests/test_inventory.py
+	new file:   tests/test_medicines.py
+	new file:   tests/test_multi_unit_packaging.py
+	new file:   tests/test_notifications.py
+	new file:   tests/test_purchases.py
+	new file:   tests/test_returns.py
+	new file:   tests/test_sales.py
+	new file:   tests/test_suppliers.py
+	new file:   tests/test_transactions.py
+	new file:   tests/test_users.py
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .dockerignore
+	modified:   DEPLOYMENT_GUIDE.md
+	modified:   app/api/forecasts.py
+	modified:   app/api/medicines.py
+	modified:   app/api/sales.py
+	modified:   app/main.py
+	modified:   app/models/__init__.py
+	modified:   app/models/medicine.py
+	modified:   app/models/sale.py
+	modified:   app/schemas/forecasting.py
+	modified:   app/schemas/medicine.py
+	modified:   app/schemas/sale.py
+	modified:   app/services/forecasting.py
+	modified:   app/services/sales.py
+	deleted:    frontend/dist/assets/index-CxS7HzkQ.js
+	modified:   frontend/dist/index.html
+	modified:   frontend/nginx.conf
+	modified:   frontend/src/App.tsx
+	modified:   frontend/src/components/layout/Sidebar.tsx
+	modified:   frontend/src/i18n/locales/ar.json
+	modified:   frontend/src/i18n/locales/en.json
+	modified:   frontend/src/pages/Medicines.tsx
+	modified:   frontend/src/pages/POS.tsx
+	modified:   frontend/src/services/api/medicines.ts
+	modified:   frontend/src/services/api/sales.ts
+	modified:   frontend/src/types/index.ts
+	modified:   frontend/tsconfig.tsbuildinfo
+	modified:   requirements.txt
+	modified:   scripts/windows/backup_database.bat
+	modified:   scripts/windows/restore_database.bat
+	modified:   scripts/windows/schedule_daily_backup.bat
+	modified:   tests/conftest.py
+	modified:   tests/test_forecasting.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	alembic/versions/c7d8e9f0a1b2_add_controlled_medicines_and_audit_snapshots.py
+	app/api/reports.py
+	app/core/controlled_policy.py
+	app/models/audit_log.py
+	app/schemas/report.py
+	app/services/reports.py
+	backups/pharmacy_db_backup_2026-10-12_21-36-03.sql
+	backups/pharmacy_db_backup_2026-10-12_21-38-47.sql
+	backups/pharmacy_db_backup_2026-10-12_21-54-20.sql
+	backups/pharmacy_db_backup_2026-10-12_22-01-14.sql
+	backups/pharmacy_db_backup_2026-10-12_23-00-01.sql
+	backups/pharmacy_db_backup_2026-10-12_23-32-32.sql
+	backups/pharmacy_db_backup_2026-10-12_23-37-23.sql
+	backups/pharmacy_db_backup_2026-10-24_12-06-09.sql
+	docs/
+	frontend/.dockerignore
+	frontend/dist/assets/index-BVMUgSLr.js
+	frontend/node_modules/
+	frontend/src/pages/ControlledMedicinesReport.tsx
+	frontend/src/services/api/reports.ts
+	scripts/audit_non_test_medicines.py
+	scripts/audit_transactions_creator.py
+	scripts/audit_users_suppliers.py
+	scripts/execute_client_handover_cleanup.py
+	scripts/inspect_client_data.py
+	scripts/inspect_full_audit.py
+	tests/test_controlled_medicines.py
+
+
+--- GIT DIFF --STAT ---
+ .dockerignore                              |   3 +
+ DEPLOYMENT_GUIDE.md                        |  29 +-
+ app/api/forecasts.py                       |  22 +
+ app/api/medicines.py                       |   6 +
+ app/api/sales.py                           |  56 ++-
+ app/main.py                                |   2 +
+ app/models/__init__.py                     |   2 +
+ app/models/medicine.py                     |   2 +
+ app/models/sale.py                         |  26 +-
+ app/schemas/forecasting.py                 |  22 +
+ app/schemas/medicine.py                    |  44 +-
+ app/schemas/sale.py                        |  32 +-
+ app/services/forecasting.py                | 248 ++++++++++-
+ app/services/sales.py                      |  30 ++
+ frontend/dist/assets/index-CxS7HzkQ.js     | 676 -----------------------------
+ frontend/dist/index.html                   |   2 +-
+ frontend/nginx.conf                        |   7 +
+ frontend/src/App.tsx                       |   3 +
+ frontend/src/components/layout/Sidebar.tsx |   3 +
+ frontend/src/i18n/locales/ar.json          |  76 ++++
+ frontend/src/i18n/locales/en.json          |  76 ++++
+ frontend/src/pages/Medicines.tsx           | 213 ++++++++-
+ frontend/src/pages/POS.tsx                 | 325 ++++++++++++++
+ frontend/src/services/api/medicines.ts     |   6 +
+ frontend/src/services/api/sales.ts         |   7 +
+ frontend/src/types/index.ts                |  82 ++++
+ frontend/tsconfig.tsbuildinfo              |   2 +-
+ requirements.txt                           |   1 +
+ scripts/windows/backup_database.bat        | 135 +++++-
+ scripts/windows/restore_database.bat       |  71 ++-
+ scripts/windows/schedule_daily_backup.bat  |  70 ++-
+ tests/conftest.py                          |   5 +
+ tests/test_forecasting.py                  | 128 ++++++
+ 33 files changed, 1661 insertions(+), 751 deletions(-)

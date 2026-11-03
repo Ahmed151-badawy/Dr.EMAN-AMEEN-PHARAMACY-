@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment secrets - never commit real credentials
+.env
+.env.*
+!.env.example
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Alembic - keep versions/, ignore any local sqlite db some tools generate
+*.sqlite3
+# Pharmacy-specific sensitive data
+backups/
+Pharmacy_Inventory_Master.xlsx
+
+# Windows shortcuts
+*.lnk
+
+# Frontend dependencies and generated files
+node_modules/
+dist/
+build/
+
+# Temporary files
+temp/
+tmp/
+
+# Test coverage
+.coverage
+htmlcov/
+
