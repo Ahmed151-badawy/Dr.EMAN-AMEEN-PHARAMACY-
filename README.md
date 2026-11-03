@@ -403,7 +403,7 @@ Contributions are welcome.
 
 ## 👥 Credits
 
-- **Architecture and engineering:** Principal Architect and Full-Stack Developer
+- **Architecture and engineering:** Ahmed Badawy
 - **Domain partner:** Dr. Eman Ameen Pharmacy, for workflow validation and deployment testing
 
 ---
